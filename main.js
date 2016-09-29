@@ -10,7 +10,7 @@ function getStorageTweets() {
 }
 
 function setStorageTweet(list) {
-    localStorage.setItem("tweets", JSON.stringify(list))
+    localStorage.setItem("tweets", JSON.stringify(list));
 }
 
 function pushTweet(tweet) {
