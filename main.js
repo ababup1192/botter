@@ -1,4 +1,4 @@
-function createItem(text) {
+function createTweetElement(text) {
     var item = document.createElement("li");
     var content = document.createTextNode(text);
     item.appendChild(content);
@@ -9,29 +9,29 @@ function getStorageTweets() {
     return Immutable.List(JSON.parse(localStorage.getItem("tweets")));
 }
 
-function setStorageTweet(list) {
+function setStorageTweets(list) {
     localStorage.setItem("tweets", JSON.stringify(list));
 }
 
 function pushTweet(tweet) {
     var tweetList = getStorageTweets();
-    setStorageTweet(tweetList.push(tweet));
+    setStorageTweets(tweetList.push(tweet));
 }
 
-function loadTweet() {
+function loadTweets() {
     var tweetsList = document.getElementById("tweets");
     tweetsList.innerHTML = "";
 
     var tweets = getStorageTweets().reverse();
     tweets.map(function (tweet) {
-        return createItem(tweet);
+        return createTweetElement(tweet);
     }).forEach(function (item) {
         tweetsList.appendChild(item);
     });
 }
 
 function init() {
-    loadTweet();
+    loadTweets();
 
     var tweetForm = document.getElementById("tweet");
 
@@ -40,7 +40,7 @@ function init() {
         if (e.keyCode === 13 && textValue !== "") {
             pushTweet(textValue);
             tweetForm.value = "";
-            loadTweet();
+            loadTweets();
         }
     });
 }
